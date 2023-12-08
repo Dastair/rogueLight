@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://fhqew58afcb8"]
+
+[ext_resource type="Texture2D" uid="uid://b6csbw75pax4a" path="res://Resources/Tilesheet/colored-transparent_packed.png" id="1_cic23"]
+[ext_resource type="Script" path="res://playerCharacter/player.gd" id="1_spyg7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_prdib"]
+atlas = ExtResource("1_cic23")
+region = Rect2(400, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8nl3n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_prdib")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_spyg7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_8nl3n")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-2, -7, -3, -6, -6, 0, -6, 5, -3, 7, 3, 7, 6, 5, 6, 0, 3, -6, 2, -7)
