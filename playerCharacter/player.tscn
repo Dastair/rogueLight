@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://fhqew58afcb8"]
+[gd_scene load_steps=9 format=3 uid="uid://fhqew58afcb8"]
 
 [ext_resource type="Texture2D" uid="uid://b6csbw75pax4a" path="res://Resources/Tilesheet/colored-transparent_packed.png" id="1_cic23"]
 [ext_resource type="Script" path="res://playerCharacter/player.gd" id="1_spyg7"]
 [ext_resource type="Texture2D" uid="uid://eb3n6cnwouag" path="res://Resources/pointLight.webp" id="3_2m4xx"]
 [ext_resource type="Script" path="res://playerCharacter/PointLight2D.gd" id="4_7qq1p"]
+[ext_resource type="Texture2D" uid="uid://d30apewus4t0t" path="res://Resources/lightParticles/flash.png" id="5_r5kti"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_prdib"]
 atlas = ExtResource("1_cic23")
@@ -19,6 +20,9 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ogeuj"]
+radius = 43.0465
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_spyg7")
@@ -38,10 +42,10 @@ shadow_enabled = true
 shadow_color = Color(0, 0, 0, 1)
 shadow_item_cull_mask = 2
 texture = ExtResource("3_2m4xx")
-texture_scale = 0.5
+texture_scale = 0.4
 script = ExtResource("4_7qq1p")
 
-[node name="PointLight2D3" type="PointLight2D" parent="."]
+[node name="CharacterLighting" type="PointLight2D" parent="."]
 range_layer_min = -50
 range_layer_max = 50
 range_item_cull_mask = 4
@@ -51,13 +55,26 @@ shadow_item_cull_mask = 2
 texture = ExtResource("3_2m4xx")
 texture_scale = 0.1
 
-[node name="PointLight2D2" type="PointLight2D" parent="."]
+[node name="PointLightNoShadows" type="PointLight2D" parent="."]
 range_layer_min = -50
 range_layer_max = 50
 range_item_cull_mask = 2
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 1)
 shadow_item_cull_mask = 0
-texture = ExtResource("3_2m4xx")
+texture = ExtResource("5_r5kti")
 texture_scale = 0.4
 script = ExtResource("4_7qq1p")
+
+[node name="EnemyLight" type="Area2D" parent="PointLightNoShadows"]
+collision_layer = 2
+collision_mask = 12
+
+[node name="circleShape" type="CollisionShape2D" parent="PointLightNoShadows/EnemyLight"]
+shape = SubResource("CircleShape2D_ogeuj")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="flashShape" type="CollisionPolygon2D" parent="PointLightNoShadows/EnemyLight"]
+position = Vector2(12, 1)
+scale = Vector2(0.989271, 1)
+polygon = PackedVector2Array(-1.01085, -4, -1, 4, 75, 39, 91, 2, 76.8243, -35)
