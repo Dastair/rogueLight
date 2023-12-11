@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://yioj4oj7mgk"]
+[gd_scene load_steps=10 format=3 uid="uid://yioj4oj7mgk"]
 
 [ext_resource type="Texture2D" uid="uid://b6csbw75pax4a" path="res://Resources/Tilesheet/colored-transparent_packed.png" id="1_phjas"]
 [ext_resource type="PackedScene" uid="uid://fhqew58afcb8" path="res://playerCharacter/player.tscn" id="2_uwfuq"]
+[ext_resource type="PackedScene" uid="uid://24yjb3y3p3i6" path="res://objects/torchBasic.tscn" id="3_eo74r"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cyc6k"]
 
@@ -3315,7 +3316,7 @@ texture = ExtResource("1_phjas")
 [sub_resource type="TileSet" id="TileSet_leove"]
 occlusion_layer_0/light_mask = 2
 occlusion_layer_0/sdf_collision = true
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 16
 physics_layer_0/collision_mask = 2
 physics_layer_0/physics_material = SubResource("PhysicsMaterial_cyc6k")
 terrain_set_0/mode = 1
@@ -4456,3 +4457,6 @@ zoom = Vector2(3, 3)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0, 0, 0, 1)
+
+[node name="torchBasic" parent="." instance=ExtResource("3_eo74r")]
+position = Vector2(-24, -32)

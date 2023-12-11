@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @onready var point_light_2d = $PointLight2D as PointLight2D
-@onready var point_light_no_shadows = $PointLight2DNoShadows as PointLight2D
+@onready var point_light_no_shadows = $PointLightNoShadows as PointLight2D
 
 @export var speed: float = 100
 

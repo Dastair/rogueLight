@@ -18,3 +18,4 @@ var is_invincible = false :
 
 # Create a signal for when this hurtbox is hit by a hitbox
 signal hurt(hitbox)
+signal left(hitbox)

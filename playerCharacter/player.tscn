@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://fhqew58afcb8"]
+[gd_scene load_steps=10 format=3 uid="uid://fhqew58afcb8"]
 
 [ext_resource type="Texture2D" uid="uid://b6csbw75pax4a" path="res://Resources/Tilesheet/colored-transparent_packed.png" id="1_cic23"]
 [ext_resource type="Script" path="res://playerCharacter/player.gd" id="1_spyg7"]
 [ext_resource type="Texture2D" uid="uid://eb3n6cnwouag" path="res://Resources/pointLight.webp" id="3_2m4xx"]
 [ext_resource type="Script" path="res://playerCharacter/PointLight2D.gd" id="4_7qq1p"]
 [ext_resource type="Texture2D" uid="uid://d30apewus4t0t" path="res://Resources/lightParticles/flash.png" id="5_r5kti"]
+[ext_resource type="Script" path="res://playerCharacter/EnemyLight.gd" id="6_728ss"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_prdib"]
 atlas = ExtResource("1_cic23")
@@ -22,9 +23,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ogeuj"]
-radius = 43.0465
+radius = 35.0143
 
 [node name="Player" type="CharacterBody2D"]
+collision_mask = 16
 script = ExtResource("1_spyg7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -69,6 +71,7 @@ script = ExtResource("4_7qq1p")
 [node name="EnemyLight" type="Area2D" parent="PointLightNoShadows"]
 collision_layer = 2
 collision_mask = 12
+script = ExtResource("6_728ss")
 
 [node name="circleShape" type="CollisionShape2D" parent="PointLightNoShadows/EnemyLight"]
 shape = SubResource("CircleShape2D_ogeuj")
