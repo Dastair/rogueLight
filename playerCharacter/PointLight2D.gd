@@ -1,8 +1,7 @@
 extends PointLight2D
+@onready var vision_cone_2d = $"../PointLightNoShadows/VisionCone2D" as VisionCone2D
 
-@onready var enemy_light = $"../PointLightNoShadows/EnemyLight" as Area2D
-@onready var circleLight = $"../PointLightNoShadows/EnemyLight/circleShape" as CollisionShape2D
-@onready var flash_shape = $"../PointLightNoShadows/EnemyLight/flashShape" as CollisionPolygon2D
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -11,25 +10,31 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		if self.texture_scale > 0.1:
 			self.texture_scale -= 0.1
+			vision_cone_2d.max_distance -= 5
 	else:
 		if self.texture_scale < 0.4:
+			vision_cone_2d.max_distance += 5
 			self.texture_scale += 0.1
 	if Input.is_action_just_released("rightMouse"):
 		self.texture_scale = 0.4
+		vision_cone_2d.angle_deg = 360
+		vision_cone_2d.reangle()
+		vision_cone_2d.max_distance = 45
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
-		look_at(get_global_mouse_position())
-		self.texture = preload("res://Resources/lightParticles/flash.png")
-		circleLight.disabled = true
-		flash_shape.disabled = false
-		self.offset.x = 15
 		
+		
+		self.texture = preload("res://Resources/lightParticles/flash.png")
+		
+		self.offset.y = 15
+		vision_cone_2d.angle_deg = 50
+		vision_cone_2d.reangle()
+		vision_cone_2d.max_distance = 90
 		self.texture_scale = 0.8
 	else:
-		circleLight.disabled = false
-		flash_shape.disabled = true
-		self.offset.x = 0
+
+		self.offset.y = 0
 		self.texture = preload("res://.godot/imported/pointLight.webp-631b7ae0c928feba6faed6027f2cf433.ctex")

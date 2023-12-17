@@ -10,3 +10,4 @@ func _ready():
 	hurtbox_component.left.connect(func(hitbox: Area2D):
 		self.frame = 0
 	)
+	self.ligh

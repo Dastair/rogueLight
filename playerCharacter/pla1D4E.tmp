@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://fhqew58afcb8"]
+[gd_scene load_steps=9 format=3 uid="uid://fhqew58afcb8"]
 
 [ext_resource type="Texture2D" uid="uid://b6csbw75pax4a" path="res://Resources/Tilesheet/colored-transparent_packed.png" id="1_cic23"]
 [ext_resource type="Script" path="res://playerCharacter/player.gd" id="1_spyg7"]
 [ext_resource type="Texture2D" uid="uid://eb3n6cnwouag" path="res://Resources/pointLight.webp" id="3_2m4xx"]
 [ext_resource type="Script" path="res://playerCharacter/PointLight2D.gd" id="4_7qq1p"]
-[ext_resource type="Script" path="res://playerCharacter/Rotater.gd" id="4_yqary"]
 [ext_resource type="Texture2D" uid="uid://d30apewus4t0t" path="res://Resources/lightParticles/flash.png" id="5_r5kti"]
 [ext_resource type="PackedScene" uid="uid://kf8tqdlm8c5t" path="res://addons/vision_cone_2d/vision_cone_2d_template.tscn" id="6_23hkg"]
 
@@ -34,6 +33,17 @@ sprite_frames = SubResource("SpriteFrames_8nl3n")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-2, -7, -3, -6, -6, 0, -6, 5, -3, 7, 3, 7, 6, 5, 6, 0, 3, -6, 2, -7)
 
+[node name="PointLight2D" type="PointLight2D" parent="."]
+range_layer_min = -50
+range_layer_max = 50
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_item_cull_mask = 2
+texture = ExtResource("3_2m4xx")
+texture_scale = 0.4
+script = ExtResource("4_7qq1p")
+
 [node name="CharacterLighting" type="PointLight2D" parent="."]
 range_layer_min = -50
 range_layer_max = 50
@@ -44,41 +54,21 @@ shadow_item_cull_mask = 2
 texture = ExtResource("3_2m4xx")
 texture_scale = 0.1
 
-[node name="Rotater" type="Node2D" parent="."]
-script = ExtResource("4_yqary")
-
-[node name="PointLightNoShadows" type="PointLight2D" parent="Rotater"]
-light_mask = 0
-rotation = -1.5708
+[node name="PointLightNoShadows" type="PointLight2D" parent="."]
 range_layer_min = -50
 range_layer_max = 50
-range_item_cull_mask = 4
+range_item_cull_mask = 2
+shadow_enabled = true
 shadow_color = Color(0, 0, 0, 1)
 shadow_item_cull_mask = 0
 texture = ExtResource("5_r5kti")
 texture_scale = 0.4
 script = ExtResource("4_7qq1p")
 
-[node name="LightHitbox" type="Area2D" parent="Rotater/PointLightNoShadows"]
+[node name="LightHitbox" type="Area2D" parent="PointLightNoShadows"]
 
-[node name="LightHitboxPolygon" type="CollisionPolygon2D" parent="Rotater/PointLightNoShadows/LightHitbox"]
+[node name="LightHitboxPolygon" type="CollisionPolygon2D" parent="PointLightNoShadows/LightHitbox"]
 
-[node name="VisionCone2D" parent="Rotater/PointLightNoShadows" node_paths=PackedStringArray("write_collision_polygon", "write_polygon2d") instance=ExtResource("6_23hkg")]
+[node name="VisionCone2D" parent="PointLightNoShadows" node_paths=PackedStringArray("write_collision_polygon") instance=ExtResource("6_23hkg")]
 collision_layer_mask = 16
 write_collision_polygon = NodePath("../LightHitbox/LightHitboxPolygon")
-write_polygon2d = NodePath("Visualization")
-
-[node name="Visualization" type="Polygon2D" parent="Rotater/PointLightNoShadows/VisionCone2D"]
-visible = false
-
-[node name="PointLight2D" type="PointLight2D" parent="Rotater"]
-light_mask = 0
-rotation = -1.5708
-range_layer_min = -50
-range_layer_max = 50
-range_item_cull_mask = 7
-shadow_enabled = true
-shadow_color = Color(0, 0, 0, 1)
-texture = ExtResource("3_2m4xx")
-texture_scale = 0.4
-script = ExtResource("4_7qq1p")

@@ -48,11 +48,10 @@ texture_scale = 0.1
 script = ExtResource("4_yqary")
 
 [node name="PointLightNoShadows" type="PointLight2D" parent="Rotater"]
-light_mask = 0
-rotation = -1.5708
 range_layer_min = -50
 range_layer_max = 50
-range_item_cull_mask = 4
+range_item_cull_mask = 2
+shadow_enabled = true
 shadow_color = Color(0, 0, 0, 1)
 shadow_item_cull_mask = 0
 texture = ExtResource("5_r5kti")
@@ -63,22 +62,25 @@ script = ExtResource("4_7qq1p")
 
 [node name="LightHitboxPolygon" type="CollisionPolygon2D" parent="Rotater/PointLightNoShadows/LightHitbox"]
 
-[node name="VisionCone2D" parent="Rotater/PointLightNoShadows" node_paths=PackedStringArray("write_collision_polygon", "write_polygon2d") instance=ExtResource("6_23hkg")]
+[node name="VisionCone2D" parent="Rotater/PointLightNoShadows" node_paths=PackedStringArray("write_collision_polygon") instance=ExtResource("6_23hkg")]
+angle_deg = null
+ray_count = null
+max_distance = null
 collision_layer_mask = 16
 write_collision_polygon = NodePath("../LightHitbox/LightHitboxPolygon")
-write_polygon2d = NodePath("Visualization")
-
-[node name="Visualization" type="Polygon2D" parent="Rotater/PointLightNoShadows/VisionCone2D"]
-visible = false
+debug_lines = null
+debug_shape = null
+minimum_recalculate_time_msec = null
+recalculate_if_static = null
+static_threshold = null
 
 [node name="PointLight2D" type="PointLight2D" parent="Rotater"]
-light_mask = 0
-rotation = -1.5708
 range_layer_min = -50
 range_layer_max = 50
-range_item_cull_mask = 7
+range_item_cull_mask = 3
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 1)
+shadow_item_cull_mask = 2
 texture = ExtResource("3_2m4xx")
 texture_scale = 0.4
 script = ExtResource("4_7qq1p")
