@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://dejnuu0ahc7iv"]
+
+[ext_resource type="Texture2D" uid="uid://b6csbw75pax4a" path="res://Resources/Tilesheet/colored-transparent_packed.png" id="1_1dmwv"]
+[ext_resource type="Script" path="res://objects/rook.gd" id="1_1rt2h"]
+[ext_resource type="Script" path="res://Resources/components/hurtbox_component.gd" id="3_gws3h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dokey"]
+size = Vector2(12, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gig7p"]
+size = Vector2(14, 18)
+
+[node name="Rook" type="CharacterBody2D"]
+light_mask = 2
+collision_layer = 16
+collision_mask = 5
+script = ExtResource("1_1rt2h")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_1dmwv")
+hframes = 49
+vframes = 22
+frame = 1072
+
+[node name="PhysicHitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dokey")
+
+[node name="HurtboxComponent" type="Area2D" parent="."]
+script = ExtResource("3_gws3h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("RectangleShape2D_gig7p")
