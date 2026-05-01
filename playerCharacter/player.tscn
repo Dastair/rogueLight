@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://fhqew58afcb8"]
+[gd_scene load_steps=11 format=3 uid="uid://fhqew58afcb8"]
 
 [ext_resource type="Texture2D" uid="uid://b6csbw75pax4a" path="res://Resources/Tilesheet/colored-transparent_packed.png" id="1_cic23"]
 [ext_resource type="Script" path="res://playerCharacter/player.gd" id="1_spyg7"]
+[ext_resource type="Script" path="res://playerCharacter/EnemyLight.gd" id="7_enemy1"]
 [ext_resource type="Texture2D" uid="uid://eb3n6cnwouag" path="res://Resources/pointLight.webp" id="3_2m4xx"]
 [ext_resource type="Script" path="res://playerCharacter/PointLight2D.gd" id="4_7qq1p"]
 [ext_resource type="Script" path="res://playerCharacter/Rotater.gd" id="4_yqary"]
@@ -60,6 +61,7 @@ texture_scale = 0.4
 script = ExtResource("4_7qq1p")
 
 [node name="LightHitbox" type="Area2D" parent="Rotater/PointLightNoShadows"]
+script = ExtResource("7_enemy1")
 
 [node name="LightHitboxPolygon" type="CollisionPolygon2D" parent="Rotater/PointLightNoShadows/LightHitbox"]
 
